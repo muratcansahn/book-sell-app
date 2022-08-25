@@ -1,8 +1,12 @@
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartSlice";
-
+import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Bookcard = ({ books }) => {
   const dispatch = useDispatch();
+  const notify = () => toast.success("Book Successfully Added to Cart");
+
   const handleClick = (id) => {
     const found = books.find((book) => book.id === id);
     dispatch(
@@ -16,8 +20,8 @@ const Bookcard = ({ books }) => {
         quantity: 1,
       })
     );
+    notify();
   };
-  console.log(books);
   return (
     <div className="flex flex-wrap justify-center">
       {books.map((book) => (
@@ -38,18 +42,25 @@ const Bookcard = ({ books }) => {
             <h5 class="text-gray-500  my-2">{book.author}</h5>
             <p className="text-gray my-5"> {book.pages} pages </p>
 
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center flex-col md:flex-row">
               <span class="text-2xl font-bold text-gray-900 dark:text-white">
                 {book.price} {book.currency}
               </span>
+              <div div className="flex mt-4 md:m-0">
+                <button
+                  onClick={() => handleClick(book.id)}
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none mx-3 md:mx-1 focus:ring-blue-300 font-medium rounded-lg  text-lg md:text-sm px-4 py-2.5 text-center"
+                >
+                  Add to cart
+                </button>
+                <ToastContainer position="top-center" autoClose={3000} />
 
-              <button
-                onClick={() => handleClick(book.id)}
-                href="#"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                Add to cart
-              </button>
+                <Link href="/cart" as={`cart`}>
+                  <button class="text-white bg-blue-700 hover:bg-blue-800 mx-3 focus:ring-4 focus:outline-none md:mx-1 focus:ring-blue-300  text-lg font-medium rounded-lg md:text-sm px-4 py-2.5 text-center">
+                    Go to cart
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
