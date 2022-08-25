@@ -1,29 +1,15 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Navbar } from "../components";
-const Home = () => {
-  return (
-    <div className="">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center"></main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
-  );
+import { Home } from "../components";
+const HomePage = ({ books }) => {
+  return <Home books={books} />;
 };
 
-export default Home;
+export default HomePage;
+
+export async function getStaticProps() {
+  const books = await fetch("http://localhost:3001/api/book").then((res) =>
+    res.json()
+  );
+  return {
+    props: { books: books.data },
+  };
+}
