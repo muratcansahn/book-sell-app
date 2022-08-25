@@ -1,4 +1,22 @@
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/cartSlice";
+
 const Bookcard = ({ books }) => {
+  const dispatch = useDispatch();
+  const handleClick = (id) => {
+    const found = books.find((book) => book.id === id);
+    dispatch(
+      addProduct({
+        author: found.author,
+        image: found.cover_url,
+        id: found.id,
+        pages: found.pages,
+        price: found.price,
+        title: found.title,
+        quantity: 1,
+      })
+    );
+  };
   console.log(books);
   return (
     <div className="flex flex-wrap justify-center">
@@ -25,12 +43,13 @@ const Bookcard = ({ books }) => {
                 {book.price} {book.currency}
               </span>
 
-              <a
+              <button
+                onClick={() => handleClick(book.id)}
                 href="#"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 Add to cart
-              </a>
+              </button>
             </div>
           </div>
         </div>
