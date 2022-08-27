@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { reset } from "../redux/cartSlice";
 import { EmptyCart } from "../components";
 const cart = () => {
   const products = useSelector((state) => state.cart.products);
-  let discount = 0;
   const total = useSelector((state) => state.cart.total);
+  let discount = 0;
+  const dispatch = useDispatch();
 
   return (
     <div className="block md:flex pt-20 ">
@@ -45,7 +47,7 @@ const cart = () => {
               </tbody>
             </table>
           </div>
-          <div className=" w-[50vw] md:w-[25vw]  h-[250px] p-10  text-center mx-auto my-5 bg-emerald-100 rounded-sm flex flex-col">
+          <div className=" w-[50vw] md:w-[25vw]  h-[290px] p-10  text-center mx-auto my-5 bg-emerald-100 rounded-sm flex flex-col">
             {" "}
             <h5 className="font-bold text-2xl"> Cart Total</h5>
             <div className="mt-4">
@@ -59,10 +61,16 @@ const cart = () => {
               <p>Total :{total - discount} </p>
             </div>
             <Link href="/checkout">
-              <button className="bg-emerald-300 hover:bg-emerald-400 text-white font-bold py-2 px-4 rounded-full mt-4 ">
+              <button className="bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded-full mt-4 ">
                 Checkout
               </button>
             </Link>
+            <button
+              className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full mt-4 "
+              onClick={() => dispatch(reset())}
+            >
+              Reset Cart
+            </button>
           </div>
         </>
       ) : (

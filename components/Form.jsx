@@ -3,14 +3,18 @@ import { FormInput } from ".";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { reset } from "../redux/cartSlice";
+
 const Form = ({ products }) => {
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
     city: "",
     postalcode: "",
   });
-  console.log(products.length);
+
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -84,6 +88,7 @@ const Form = ({ products }) => {
       postalcode: "",
     });
     notify();
+    dispatch(reset());
   };
   return (
     <form class="justify-center w-full mx-auto" method="post" action>
