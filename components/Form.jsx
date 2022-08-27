@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { FormInput } from ".";
-const Form = () => {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+const Form = ({ products }) => {
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
     city: "",
     postalcode: "",
   });
-  const [focused, setFocused] = useState(false);
-  const handleFocus = (id) => {
-    setFocused(true);
-    console.log(id);
-  };
+  console.log(products.length);
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  const notify = () => toast.success("Order Received");
 
   const inputs = [
     {
@@ -36,8 +36,8 @@ const Form = () => {
       label: "Last Name",
       required: true,
       errorMessage:
-        "Last name is should be 3-16 characters and should not include any special characters",
-      pattern: "^[a-zA-Z0-9]{3,16}$", // 3-16 characters, no special characters
+        "Last name is should be 5-16 characters and should not include any special characters",
+      pattern: "^[a-zA-Z0-9]{5,16}$", // 5-16 characters, no special characters
     },
     {
       id: 3,
@@ -61,7 +61,30 @@ const Form = () => {
       pattern: "^[0-9]{2}-[0-9]{3}$", // XX-XXX format
     },
   ];
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/api/order   ", {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        city: values.city,
+        zip_code: values.postalcode,
+        order: [
+          {
+            id: products[0].id,
+            quantity: products.length,
+          },
+        ],
+      })
+      .then((res) => console.log(res.data));
+    setValues({
+      firstName: "",
+      lastName: "",
+      city: "",
+      postalcode: "",
+    });
+    notify();
+  };
   return (
     <form class="justify-center w-full mx-auto" method="post" action>
       {inputs.map((input) => (
@@ -100,10 +123,14 @@ const Form = () => {
         // </div>
       ))}
       <div class="mt-5 text-center">
-        <button class="w-1/2 px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900">
+        <button
+          class="w-1/2 px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900 "
+          onClick={handleSubmit}
+        >
           Process
         </button>
       </div>
+      <ToastContainer position="top-center" autoClose={3000} />
     </form>
   );
 };

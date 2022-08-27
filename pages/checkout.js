@@ -5,7 +5,7 @@ import { Form } from "../components";
 const checkout = () => {
   const products = useSelector((state) => state.cart.products);
   const total = useSelector((state) => state.cart.total);
-  console.log(products);
+  console.log("products", products);
   return (
     <div className="pt-20">
       <div class="container p-12 mx-auto">
@@ -17,7 +17,7 @@ const checkout = () => {
             <h2 class="mb-4 font-bold md:text-xl text-heading ">
               Shipping Address
             </h2>
-            <Form />
+            <Form products={products} />
           </div>
           <div class="flex flex-col w-full ml-0 lg:ml-12 lg:w-2/5">
             <div class="pt-12 md:pt-0 2xl:ps-4">

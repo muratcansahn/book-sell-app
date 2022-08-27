@@ -18,6 +18,7 @@ const Bookcard = ({ books }) => {
         price: found.price,
         title: found.title,
         quantity: 1,
+        currency: found.currency,
       })
     );
     notify();
@@ -49,17 +50,11 @@ const Bookcard = ({ books }) => {
               <div div className="flex mt-4 md:m-0">
                 <button
                   onClick={() => handleClick(book.id)}
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none mx-3 md:mx-1 focus:ring-blue-300 font-medium rounded-lg  text-lg md:text-sm px-4 py-2.5 text-center"
+                  class="text-white bg-emerald-300 hover:bg-emerald-500 focus:ring-4 focus:outline-none mx-3 md:mx-1 focus:ring-blue-300 font-medium rounded-lg  text-lg md:text-sm px-4 py-2.5 text-center"
                 >
                   Add to cart
                 </button>
                 <ToastContainer position="top-center" autoClose={3000} />
-
-                <Link href="/cart" as={`cart`}>
-                  <button class="text-white bg-blue-700 hover:bg-blue-800 mx-3 focus:ring-4 focus:outline-none md:mx-1 focus:ring-blue-300  text-lg font-medium rounded-lg md:text-sm px-4 py-2.5 text-center">
-                    Go to cart
-                  </button>
-                </Link>
               </div>
             </div>
           </div>
