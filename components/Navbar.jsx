@@ -6,7 +6,7 @@ const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
   return (
     <nav>
-      <div className="flex  bg-emerald-100 align-center justify-between fixed w-full">
+      <div className="flex  bg-emerald-100 align-center justify-between fixed w-full z-10">
         <Link href="/">
           <div className="flex ml-7 cursor-pointer">
             <div className="relative pt-3 ">

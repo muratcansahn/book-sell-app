@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartSlice";
-import Link from "next/link";
+import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Bookcard = ({ books }) => {
@@ -27,13 +27,13 @@ const Bookcard = ({ books }) => {
     <div className="flex flex-wrap justify-center">
       {books.map((book) => (
         <div class="w-full max-w-sm bg-white m-7 rounded-lg shadow-md">
-          <a href="#">
-            <img
-              class="p-8 rounded-t-lg"
-              src={book.cover_url}
-              alt="book_image"
-            />
-          </a>
+          <Image
+            src={book.cover_url}
+            alt="book_image"
+            width={250}
+            height={300}
+          />
+
           <div class="px-5 pb-5">
             <a href="#">
               <h2 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">

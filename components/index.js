@@ -4,3 +4,6 @@ export { default as Bookcard } from "./Bookcard";
 export { default as Form } from "./Form";
 export { default as FormInput } from "./FormInput";
 export { default as EmptyCart } from "./EmptyCart";
+export { default as Cart } from "./Cart";
+export { default as Checkout } from "./Checkout";
+export { default as OrderSummary } from "./OrderSummary";
