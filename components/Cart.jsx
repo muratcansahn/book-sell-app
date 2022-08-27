@@ -52,7 +52,7 @@ const Cart = () => {
                 </tbody>
               </table>
             </div>
-            <div className=" w-[50vw] md:w-[25vw]  h-[290px] p-10  text-center mx-auto my-5 bg-emerald-100 rounded-sm flex flex-col">
+            <div className=" w-[80vw] md:w-[25vw]  h-[290px] p-10  text-center mx-auto my-5 bg-emerald-100 rounded-sm flex flex-col">
               {" "}
               <h5 className="font-bold text-2xl"> Cart Total</h5>
               <div className="mt-4">

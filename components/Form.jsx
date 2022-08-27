@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { FormInput } from ".";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { reset } from "../redux/cartSlice";
 import { useRouter } from "next/router";
+import { reset } from "../redux/cartSlice";
 
 const Form = ({ products }) => {
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -20,7 +18,6 @@ const Form = ({ products }) => {
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const notify = () => toast.success("Order Received");
 
   const inputs = [
     {
@@ -67,22 +64,21 @@ const Form = ({ products }) => {
       pattern: "^[0-9]{2}-[0-9]{3}$", // XX-XXX format
     },
   ];
-  ///check is postal code is correct
-  const isPostalCodeValid = (value) => {
-    const regex = /^[0-9]{2}-[0-9]{3}$/;
-    return regex.test(value);
-  };
 
-  const isCityValid = (value) => {
-    const regex = /^[^0-9]+$/;
-    return regex.test(value);
-  };
   const isFirstNameValid = (value) => {
     const regex = /^[a-zA-Z0-9]{3,16}$/;
     return regex.test(value);
   };
   const isLastNameValid = (value) => {
     const regex = /^[a-zA-Z0-9]{5,16}$/;
+    return regex.test(value);
+  };
+  const isCityValid = (value) => {
+    const regex = /^[^0-9]+$/;
+    return regex.test(value);
+  };
+  const isPostalCodeValid = (value) => {
+    const regex = /^[0-9]{2}-[0-9]{3}$/;
     return regex.test(value);
   };
 
@@ -95,6 +91,7 @@ const Form = ({ products }) => {
       : false;
   };
   const handleSubmit = (e) => {
+    e.preventDefault();
     axios
       .post("http://localhost:3001/api/order   ", {
         first_name: values.firstName,
@@ -109,6 +106,8 @@ const Form = ({ products }) => {
         ],
       })
       .then((res) => console.log(res.data));
+    dispatch(reset());
+
     router.push("/success");
   };
   return (
@@ -130,7 +129,6 @@ const Form = ({ products }) => {
           Process
         </button>
       </div>
-      <ToastContainer position="top-center" autoClose={3000} />
     </form>
   );
 };

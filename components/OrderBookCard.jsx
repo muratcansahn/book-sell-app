@@ -2,15 +2,13 @@ import Image from "next/image";
 const OrderBookCard = ({ product }) => {
   return (
     <div class="flex space-x-4">
-      <div>
-        <div className="">
-          <Image
-            src={product.image}
-            alt={product.title}
-            width={100}
-            height={100}
-          />
-        </div>
+      <div className="">
+        <Image
+          src={product.image}
+          alt={product.title}
+          width={100}
+          height={100}
+        />
       </div>
       <div>
         <h2 class="text-m font-bold">{product.title}</h2>

@@ -7,7 +7,6 @@ const FormInput = (props) => {
   };
   return (
     <div className="formInput flex flex-col">
-      {/* <label>Username</label> */}
       <label className="block text-gray-700 text-sm font-bold mb-2">
         {label}
       </label>
