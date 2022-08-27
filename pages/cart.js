@@ -1,9 +1,10 @@
-import React from "react";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 const cart = () => {
   const products = useSelector((state) => state.cart.products);
-  console.log(products);
   let discount = 0;
+  const total = useSelector((state) => state.cart.total);
+  console.log(total);
   return (
     <div className="block md:flex pt-20 ">
       <div class="overflow-x-auto relative w-full md:w-[65%] md:h-[calc(100vh-140px)] m-5 ">
@@ -44,13 +45,15 @@ const cart = () => {
         <h5 className="font-bold text-2xl"> Cart Total</h5>
         <div className="mt-4">
           {" "}
-          <p>Subtotal :5</p>
+          <p>Subtotal : {total}</p>
           <p>Discount :{discount} </p>
-          <p>Total:{5 - discount}</p>
+          <p>Total:{total - discount}</p>
         </div>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-4 ">
-          Checkout
-        </button>
+        <Link href="/checkout">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-4 ">
+            Checkout
+          </button>
+        </Link>
       </div>
     </div>
   );
