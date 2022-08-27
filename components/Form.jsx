@@ -5,9 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { reset } from "../redux/cartSlice";
+import { useRouter } from "next/router";
 
 const Form = ({ products }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -83,16 +85,7 @@ const Form = ({ products }) => {
     const regex = /^[a-zA-Z0-9]{5,16}$/;
     return regex.test(value);
   };
-  console.log(
-    "firstname",
-    isFirstNameValid(values.firstName),
-    "lastname",
-    isLastNameValid(values.lastName),
-    "city",
-    isCityValid(values.city),
-    "postalcode",
-    isPostalCodeValid(values.postalcode)
-  );
+
   const isFormValid = () => {
     return isFirstNameValid(values.firstName) &&
       isLastNameValid(values.lastName) &&
@@ -101,9 +94,7 @@ const Form = ({ products }) => {
       ? true
       : false;
   };
-  console.log(isFormValid());
   const handleSubmit = (e) => {
-    e.preventDefault();
     axios
       .post("http://localhost:3001/api/order   ", {
         first_name: values.firstName,
@@ -118,14 +109,7 @@ const Form = ({ products }) => {
         ],
       })
       .then((res) => console.log(res.data));
-    setValues({
-      firstName: "",
-      lastName: "",
-      city: "",
-      postalcode: "",
-    });
-    notify();
-    dispatch(reset());
+    router.push("/success");
   };
   return (
     <form class="justify-center w-full mx-auto" method="post" action>
@@ -136,33 +120,6 @@ const Form = ({ products }) => {
           value={values[input.name]}
           onChange={onChange}
         />
-
-        // <div class="flex flex-col">
-        //   <div>
-        //     <label
-        //       class="block text-gray-700 text-sm font-bold mb-2"
-        //       for={input.name}
-        //     >
-        //       {input.label}
-        //     </label>
-        //     <input
-        //       {...input}
-        //       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight peer"
-        //       id={input.id}
-        //       type={input.type}
-        //       name={input.name}
-        //       placeholder={input.placeholder}
-        //       onChange={onChange}
-        //       value={values[input.name]}
-        //       required={input.required}
-        //       onBlur={handleFocus}
-        //       pattern={input.pattern}
-        //     />
-        //   </div>
-        //   {focused && (
-        //     <div class="text-red-500 text-xs italic">{input.errorMessage}</div>
-        //   )}
-        // </div>
       ))}
       <div class="mt-5 text-center">
         <button

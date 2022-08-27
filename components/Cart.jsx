@@ -17,33 +17,33 @@ const Cart = () => {
       <div className="block md:flex pt-20 ">
         {products.length > 0 ? (
           <>
-            <div class="overflow-x-auto relative w-full md:w-[65%] md:h-[calc(100vh-140px)] m-5 ">
-              <table class="w-full text-sm text-left text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <div className="overflow-x-auto relative w-full md:w-[65%] md:h-[calc(100vh-140px)] m-5 ">
+              <table className="w-full text-sm text-left text-gray-500">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr>
-                    <th scope="col" class="py-3 px-6">
+                    <th scope="col" className="py-3 px-6">
                       Book Name
                     </th>
-                    <th scope="col" class="py-3 px-6">
+                    <th scope="col" className="py-3 px-6">
                       Author{" "}
                     </th>
-                    <th scope="col" class="py-3 px-6">
+                    <th scope="col" className="py-3 px-6">
                       Price
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((product) => (
-                    <tr class="bg-white border-b">
+                  {products.map((product, i) => (
+                    <tr className="bg-white border-b" key={i}>
                       <>
                         <th
                           scope="row"
-                          class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                         >
                           {product.title}
                         </th>
-                        <td class="py-4 px-6">{product.author}</td>
-                        <td class="py-4 px-6">
+                        <td className="py-4 px-6">{product.author}</td>
+                        <td className="py-4 px-6">
                           {product.price} {product.currency}
                         </td>
                       </>

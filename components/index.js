@@ -7,3 +7,5 @@ export { default as EmptyCart } from "./EmptyCart";
 export { default as Cart } from "./Cart";
 export { default as Checkout } from "./Checkout";
 export { default as OrderSummary } from "./OrderSummary";
+export { default as PaymentSuccess } from "./PaymentSuccess";
+export { default as OrderBookCard } from "./OrderBookCard";

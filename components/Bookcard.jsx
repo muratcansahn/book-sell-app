@@ -25,8 +25,11 @@ const Bookcard = ({ books }) => {
   };
   return (
     <div className="flex flex-wrap justify-center">
-      {books.map((book) => (
-        <div class="w-full max-w-sm bg-white m-7 rounded-lg shadow-md">
+      {books.map((book, i) => (
+        <div
+          className="w-full max-w-sm bg-white m-7 rounded-lg shadow-md"
+          key={i}
+        >
           <Image
             src={book.cover_url}
             alt="book_image"
@@ -34,23 +37,23 @@ const Bookcard = ({ books }) => {
             height={300}
           />
 
-          <div class="px-5 pb-5">
+          <div className="px-5 pb-5">
             <a href="#">
-              <h2 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              <h2 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 {book.title}
               </h2>
             </a>
-            <h5 class="text-gray-500  my-2">{book.author}</h5>
+            <h5 className="text-gray-500  my-2">{book.author}</h5>
             <p className="text-gray my-5"> {book.pages} pages </p>
 
-            <div class="flex justify-between items-center flex-col md:flex-row">
-              <span class="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="flex justify-between items-center flex-col md:flex-row">
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
                 {book.price} {book.currency}
               </span>
-              <div div className="flex mt-4 md:m-0">
+              <div className="flex mt-4 md:m-0">
                 <button
                   onClick={() => handleClick(book.id)}
-                  class="text-white bg-emerald-300 hover:bg-emerald-500 focus:ring-4 focus:outline-none mx-3 md:mx-1 focus:ring-blue-300 font-medium rounded-lg  text-lg md:text-sm px-4 py-2.5 text-center"
+                  className="text-white bg-emerald-300 hover:bg-emerald-500 focus:ring-4 focus:outline-none mx-3 md:mx-1 focus:ring-blue-300 font-medium rounded-lg  text-lg md:text-sm px-4 py-2.5 text-center"
                 >
                   Add to cart
                 </button>
